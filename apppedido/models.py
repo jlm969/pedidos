@@ -1,3 +1,4 @@
+from re import A
 from django.db import models
 
 # Create your models here.
@@ -9,12 +10,21 @@ class Cliente(models.Model):
     direccion = models.CharField(max_length=40)
     email = models.EmailField()
     localidad = models.CharField(max_length=40)
+    
+    def __str__(self):
+        txt = "{0} {1}  - {2}"
+        return txt.format(self.nombre , self.apellido, self.direccion)
+           
 
 class Producto(models.Model):
     id_producto = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=40)
     precio = models.FloatField()  
 
+
+    def __str__(self):
+        txt = "{0}"
+        return txt.format(self.nombre)
 class Repartidor(models.Model):
     id_repartidor = models.CharField(max_length=4 ,primary_key=True)
     nombre = models.CharField(max_length=40)
@@ -29,9 +39,9 @@ class Repartidor(models.Model):
     sexo = models.CharField(max_length=1, choices=sexos, default="F")
     
 
-    def nombreCompleto(self):
+    def __str__(self):
         txt = "{0} {1}"
-        return txt.format(self.apellido, self.nombre)
+        return txt.format(self.nombre , self.apellido)
 
 class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key=True)
@@ -41,3 +51,13 @@ class Pedido(models.Model):
     repartidor = models.ForeignKey(Repartidor, null=True, blank=True, on_delete=models.CASCADE)
 
 
+    def __str__(self):
+        txt = "Nro. Pedido: {0} Cliente: {1} Productos:  {2}    Repartidor: {3}     Fecha: {4}"
+        if self.repartidor==None:
+            reparto="RETIRA EN LOCAL"        
+        else:
+            reparto=self.repartidor
+
+        fechaPedido = self.fecha.strftime("%d/%m/%Y %H:%M:%S")    
+        return txt.format(self.id_pedido,  self.cliente, self.producto, reparto, fechaPedido)
+       # return txt.format(self.id_pedido, self.producto, self.cliente, self.repartidor, self.fecha)
