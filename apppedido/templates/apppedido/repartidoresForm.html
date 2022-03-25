@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        {% load static  %}
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Formulario de Repartidores</title>
+    </head>
+    <body>
+        <form action="/apppedido/formularioRepartidor/" method="POST">
+            {% csrf_token %}
+           <p> Codigo   :<input type="number" name="id_repartidor" id=""> </p>
+           <p> Nombre   :<input type="text" name="nombre" id=""> </p>
+           <p> Apellido :<input type="text" name="apellido" id=""> </p>
+           <p> Direccion:<input type="text" name="direccion" id=""> </p>
+           <p> E-mail   :<input type="text" name="email" id=""> </p>
+           <p> Celular  :<input type="text" name="num_celular" id=""> </p>
+           <p> Sexo     :<input type="text" name="sexo" id=""> </p>
+
+           <p><input type="submit" value="Agregar Repartidor"> </p>
+
+        </form>
+    </body>

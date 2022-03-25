@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 class Cliente(models.Model):
-    num_celular = models.CharField(max_length=15, primary_key=True)
+    celular = models.CharField(max_length=15, primary_key=True)
     nombre = models.CharField(max_length=40)
     apellido = models.CharField(max_length=40)
     direccion = models.CharField(max_length=40)
@@ -17,16 +17,16 @@ class Cliente(models.Model):
            
 
 class Producto(models.Model):
-    id_producto = models.AutoField(primary_key=True)
+    id_producto = models.PositiveIntegerField(primary_key=True)
     nombre = models.CharField(max_length=40)
     precio = models.FloatField()  
-
 
     def __str__(self):
         txt = "{0}"
         return txt.format(self.nombre)
+
 class Repartidor(models.Model):
-    id_repartidor = models.CharField(max_length=4 ,primary_key=True)
+    id_repartidor = models.PositiveSmallIntegerField(primary_key=True)
     nombre = models.CharField(max_length=40)
     apellido = models.CharField(max_length=40)
     direccion = models.CharField(max_length=40)
@@ -40,8 +40,8 @@ class Repartidor(models.Model):
     
 
     def __str__(self):
-        txt = "{0} {1}"
-        return txt.format(self.nombre , self.apellido)
+        txt = "{0} -  {1} {2}"
+        return txt.format(self.id_repartidor, self.nombre , self.apellido)
 
 class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key=True)

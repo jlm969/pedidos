@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static  %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Productos</title>
+</head>
+<body>
+
+    
+    {% if formulario.errors %}
+        <p style="color:red"> Problemas con los datos cargados</p>
+    {% endif %}
+        
+
+        <form action="/apppedido/formularioProducto/" method='POST'>
+            {% csrf_token %}
+            <table>
+                {{formulario.as_table}}
+            </table>
+
+           <p><input type="submit" value="Agregar Producto"> </p>
+        </form>
+</body>
+</html>
