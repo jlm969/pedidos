@@ -13,7 +13,8 @@
 
        <p> <input type="submit" name="Buscar"></p>
     <form>
-
+    {% if error %}<p style="color:red">{{error}}</p>{% endif %}
+    
     {% if producto  %}
         <p> Producto encontrado: {{producto.nombre}} </p>
     {% endif %}

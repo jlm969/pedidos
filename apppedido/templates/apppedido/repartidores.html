@@ -2,6 +2,51 @@
 
 {% block main_content %}
 
-<h1>Vista de Repartidores</h1>
+<!-- Formulario de Repartidores  , pasado en la vista del repartidor-->
+<div class="container mt-5">
+    {% if formulario.errors %}
+           <p style="color:red"> Problemas con los datos cargados</p>
+       {% endif %}
+           <form action="/apppedido/repartidores/" method='POST' class="form-group">
+               {% csrf_token %}
+               <table>
+                   {{formulario.as_table}}
+               </table>
+              <br> 
+              <p><input type="submit" value="Agregar Repartidor"> </p>
+           </form>
+   </div>
+
+<!-- Listado de Repartidores-->
+<div class="container mt-5">
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th class="table-success">Codigo</th>
+                <th class="table-success">Nombre</th>
+                <th class="table-success">Apellido</th>
+                <th class="table-success">Direccion</th>
+                <th class="table-success">E-mail</th>
+                <th class="table-success">Celular</th>
+                <th class="table-success">Sexo</th>
+            </tr>
+        </thead>
+
+        <body>
+            {% for repartidor in repartidores %}
+                <tr>
+                <td>{{repartidor.id_repartidor}}</td>    
+                <td>{{repartidor.nombre}}</td>
+                <td>{{repartidor.apellido}}</td>
+                <td>{{repartidor.direccion}}</td>
+                <td>{{repartidor.email}}</td>
+                <td>{{repartidor.num_celular}}</td>
+                <td>{{repartidor.sexo}}</td>
+                </tr>
+             {% endfor %}     
+        </body>
+
+    </table>
 
 {% endblock main_content %}

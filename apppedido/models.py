@@ -46,10 +46,9 @@ class Repartidor(models.Model):
 class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key=True)
     producto = models.ForeignKey(Producto, null=False, blank=False, on_delete=models.CASCADE)
-    cliente = models.ForeignKey(Cliente, null=False, blank=False, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)
     repartidor = models.ForeignKey(Repartidor, null=True, blank=True, on_delete=models.CASCADE)
-
 
     def __str__(self):
         txt = "Nro. Pedido: {0} Cliente: {1} Productos:  {2}    Repartidor: {3}     Fecha: {4}"
@@ -60,4 +59,4 @@ class Pedido(models.Model):
 
         fechaPedido = self.fecha.strftime("%d/%m/%Y %H:%M:%S")    
         return txt.format(self.id_pedido,  self.cliente, self.producto, reparto, fechaPedido)
-       # return txt.format(self.id_pedido, self.producto, self.cliente, self.repartidor, self.fecha)
+

@@ -2,6 +2,52 @@
 
 {% block main_content %}
 
-<h1>Vista de Clientes</h1>
+
+<!-- Formulario de Clientes  , pasado en la vista del cliente-->
+<div class="container mt-5">
+    {% if formulario.errors %}
+           <p style="color:red"> Problemas con los datos cargados</p>
+       {% endif %}
+           <form action="/apppedido/clientes/" method='POST' class="form-group">
+               {% csrf_token %}
+               <table>
+                   {{formulario.as_table}}
+               </table>
+              <br> 
+              <p><input type="submit" value="Agregar Cliente"> </p>
+           </form>
+   </div>
+
+<!-- Listado de Clientes-->
+<div class="container mt-5">
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th class="table-success">Celular</th>
+                <th class="table-success">Nombre</th>
+                <th class="table-success">Apellido</th>
+                <th class="table-success">Direccion</th>
+                <th class="table-success">E-mail</th>
+                <th class="table-success">Localidad</th>
+            </tr>
+        </thead>
+
+        <body>
+            {% for cliente in clientes %}
+                <tr>
+                <td>{{cliente.celular}}</td>
+                <td>{{cliente.nombre}}</td>
+                <td>{{cliente.apellido}}</td>
+                <td>{{cliente.direccion}}</td>
+                <td>{{cliente.email}}</td>
+                <td>{{cliente.localidad}}</td>
+                </tr>
+             {% endfor %}     
+        </body>
+
+    </table>
+
+</div>
 
 {% endblock main_content %}
