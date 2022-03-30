@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Producto</title>
+{% extends 'apppedido/base.html' %}
+
+{% block main_content %}
 </head>
-<body>      
-    <form action="/apppedido/buscarProducto/" method="get">
-
-       <p> <input type="number" name="id_producto"> </p>
-
-       <p> <input type="submit" name="Buscar"></p>
-    <form>
-    {% if error %}<p style="color:red">{{error}}</p>{% endif %}
+<body> 
+        <form action="/apppedido/buscarProducto/" method="get">
+            <h3 class="text-center">Buscar Producto</h3> 
+            <p class="text-center"><input type="number" name="id_producto"> </p>
+            <p class="text-center"> <input type="submit" value="Buscar"> </p>
+        <form>
+        {% if error %}<p style="color:red">{{error}}</p>{% endif %}
     
-    {% if producto  %}
-        <p> Producto encontrado: {{producto.nombre}} </p>
-    {% endif %}
+        {% if producto  %}
+             <p> Producto encontrado: {{producto.nombre}} </p>
+        {% endif %}
 
 </body>
 </html>
+{% endblock main_content %}
+
+

@@ -12,11 +12,11 @@ from apppedido.forms import ProductoFormulario, ClienteFormulario, RepartidorFor
 # Create your views here.
 
 def inicio(request):
-    dict_ctx = {"title": "Inicio", "page": "Inicio"}
+    dict_ctx = {"title": "Inicio", "page": "DELIVERY - PEDIDOS WEB"}
     return render(request, "apppedido/index.html", dict_ctx)
 
 def pedidos(request):
-     return render(request, "apppedido/pedidos.html")
+    return render(request, "apppedido/pedidos.html",{"title":"Pedidos", "page":"EN CONSTRUCCION..."})
 
 def productos(request):
     productos = Producto.objects.all()
@@ -76,15 +76,18 @@ def clientes (request):
 
 
 def buscar_producto(request):
-
-    data = request.GET['id_producto']
+    data = request.GET.get('id_producto')
     error =""
     if data:
         try:
-           producto = Producto.objects.filter(id_producto=data)
-           return render(request, "apppedido/buscarProducto.html", {'producto':producto[0]}) 
+           producto = Producto.objects.get(id_producto=data)
+           return render(request, "apppedido/buscarProducto.html", {'page':producto})
+           #return render(request, "apppedido/buscarProducto.html", {'producto':producto}) 
+           #return render(request, "apppedido/buscarProducto.html", {'producto':producto[0]}) 
         except Exception as exc:
             print(exc)
             error = "No existe el producto"
-    return render(request, "apppedido/buscarProducto.html", {"error": error}) #le paso una plantilla .html
+    return render(request, "apppedido/buscarProducto.html", {"page": error}) #le paso una plantilla .html
+    #return render(request, "apppedido/buscarProducto.html", {"error": error}) #le paso una plantilla .html
+
 
