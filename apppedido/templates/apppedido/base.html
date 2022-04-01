@@ -29,7 +29,11 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            <h1 class="mb-5">{{page}}</h1>        
+                            <h1 class="mb-5">{{mensaje}}</h1> 
+                            <h1 class="mb-5">{{page}}</h1>  
+                            
+                            {% block main_content %}{% endblock main_content %}
+
                         </div>
                     </div>
                 </div>
@@ -37,7 +41,7 @@
         </header>
 
        
-        {% block main_content %}{% endblock main_content %}
+      
       
        
         <!-- Footer-->

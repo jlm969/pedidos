@@ -30,6 +30,7 @@
                 <th class="table-success">E-mail</th>
                 <th class="table-success">Celular</th>
                 <th class="table-success">Sexo</th>
+                <th class="table-success">Accion</th>
             </tr>
         </thead>
 
@@ -43,6 +44,11 @@
                 <td>{{repartidor.email}}</td>
                 <td>{{repartidor.num_celular}}</td>
                 <td>{{repartidor.sexo}}</td>
+                <td>
+                    <button>
+                        <a href="{%  url 'EliminarRepartidor'  repartidor.id_repartidor  %}">Eliminar</a>
+                    </button>
+                </td>
                 </tr>
              {% endfor %}     
         </body>

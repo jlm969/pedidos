@@ -1,0 +1,20 @@
+{% extends 'apppedido/base.html' %}
+
+{% block main_content %}
+
+    {% if formulario.errors %}
+        <p style="color:red"> Problemas con los datos cargados</p>
+    {% endif %}
+        
+
+        <form action="/apppedido/actualizarProducto/{{codigo_producto}}/" method='POST'>
+            {% csrf_token %}
+            <table>
+                {{formulario.as_table}}
+            </table>
+
+           <input type="submit" class="btn btn-primary" value="Guardar">
+        </form>
+</body>
+</html>
+{% endblock main_content %}

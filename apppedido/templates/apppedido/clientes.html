@@ -30,6 +30,7 @@
                 <th class="table-success">Direccion</th>
                 <th class="table-success">E-mail</th>
                 <th class="table-success">Localidad</th>
+                <th class="table-success">Accion</th>
             </tr>
         </thead>
 
@@ -42,6 +43,9 @@
                 <td>{{cliente.direccion}}</td>
                 <td>{{cliente.email}}</td>
                 <td>{{cliente.localidad}}</td>
+                <td><button>
+                    <a href="{% url  'EliminarCliente' cliente.celular %}">Eliminar</a>
+                </button></td>
                 </tr>
              {% endfor %}     
         </body>

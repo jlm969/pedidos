@@ -14,7 +14,7 @@
                 {{formulario.as_table}}
             </table>
            <br> 
-           <p><input type="submit" value="Agregar Producto"> </p>
+           <p><input type="submit" class="btn btn-primary" value="Agregar Producto"> </p>
         </form>
 </div>
 
@@ -27,6 +27,8 @@
                 <th class="table-success">Codigo</th>
                 <th class="table-success">Nombre</th>
                 <th class="table-success">Precio</th>
+                <th class="table-success">Accion</th>
+                <th class="table-success"></th>
             </tr>
         </thead>
 
@@ -36,8 +38,17 @@
                 <td>{{producto.id_producto}}</td>
                 <td>{{producto.nombre}}</td>
                 <td>{{producto.precio}}</td>
+                <td>
+                    <button class="btn-info"><a href="{% url 'ActualizarProducto' producto.id_producto %}" >Editar</a></button>
+                </td>
+                <td>
+                    <button>
+                        <a href="{% url 'EliminarProducto' producto.id_producto %}" >Eliminar</a>
+                    </button>
+                </td>
+        
                 </tr>
-             {% endfor %}     
+             {% endfor %}       
         </body>
 
     </table>

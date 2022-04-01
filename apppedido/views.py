@@ -25,7 +25,6 @@ def productos(request):
         producto = ProductoFormulario(request.POST)
         if producto.is_valid():    
             datos = producto.cleaned_data
-
             producto_nuevo = Producto(datos['id_producto'], datos['nombre'], datos['precio'])        
             producto_nuevo.save()
             
@@ -81,7 +80,8 @@ def buscar_producto(request):
     if data:
         try:
            producto = Producto.objects.get(id_producto=data)
-           return render(request, "apppedido/buscarProducto.html", {'page':producto})
+           mensaje="Producto encontrado:"
+           return render(request, "apppedido/buscarProducto.html", {'mensaje':mensaje,'page':producto})
            #return render(request, "apppedido/buscarProducto.html", {'producto':producto}) 
            #return render(request, "apppedido/buscarProducto.html", {'producto':producto[0]}) 
         except Exception as exc:
@@ -91,3 +91,58 @@ def buscar_producto(request):
     #return render(request, "apppedido/buscarProducto.html", {"error": error}) #le paso una plantilla .html
 
 
+def eliminar_producto(request, codigo_producto):
+    try:
+        producto = Producto.objects.get(id_producto=codigo_producto)
+        producto.delete()
+        productos = Producto.objects.all()
+        contexto= {"productos":productos}
+        return render(request, "apppedido/productos.html",contexto)
+    except Exception as exc:
+        return render(request, "apppedido/index.html")
+
+
+
+def actualizar_producto(request, codigo_producto):
+
+    producto = Producto.objects.get(id_producto=codigo_producto)
+  
+    if request.method == 'POST':
+        formulario = ProductoFormulario(request.POST)
+        if formulario.is_valid():    
+            data = formulario.cleaned_data
+            producto.nombre = data["nombre"]
+            producto.precio = data["precio"]
+            producto.save()
+            productos = Producto.objects.all()
+            contexto= {"productos":productos}
+            return render(request,"apppedido/productos.html", contexto)  
+        #else:
+        #   return render(request,"apppedido/index.html")    
+    else:
+        formulario = ProductoFormulario(initial= {"id_producto" : producto.id_producto,
+                                                   "nombre":producto.nombre, "precio":producto.precio})
+        return render(request,"apppedido/actualizarProducto.html", {"formulario":formulario ,"codigo_producto":codigo_producto})
+
+
+
+def eliminar_cliente(request, num_celular):
+    try:
+        cliente = Cliente.objects.get(celular=num_celular)
+        cliente.delete()
+        clientes = Cliente.objects.all()
+        contexto= {"clientes":clientes}
+        return render(request, "apppedido/clientes.html",contexto)
+    except Exception as exc:
+        return render(request, "apppedido/index.html")
+
+
+def eliminar_repartidor(request, codigo_repartidor):
+    try:
+        repartidor = Repartidor.objects.get(id_repartidor=codigo_repartidor)
+        repartidor.delete()
+        repartidores = Repartidor.objects.all()
+        contexto= {"repartidores":repartidores}
+        return render(request, "apppedido/repartidores.html",contexto)
+    except Exception as exc:
+        return render(request, "apppedido/index.html")
