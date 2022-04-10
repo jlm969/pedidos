@@ -1,6 +1,6 @@
-from re import A
+from tkinter import CASCADE
 from django.db import models
-
+from django.contrib.auth.models import User 
 # Create your models here.
 
 class Cliente(models.Model):
@@ -21,9 +21,8 @@ class Producto(models.Model):
     nombre = models.CharField(max_length=40)
     precio = models.FloatField()  
 
-    def __str__(self):
-        txt = "{0}"
-        return txt.format(self.nombre)
+    def __str__(self) -> str:
+        return f" {self.id_producto} | {self.nombre} -  $  {self.precio}"
 
 class Repartidor(models.Model):
     id_repartidor = models.PositiveSmallIntegerField(primary_key=True)
@@ -39,9 +38,8 @@ class Repartidor(models.Model):
     sexo = models.CharField(max_length=1, choices=sexos, default="F")
     
 
-    def __str__(self):
-        txt = "{0} -  {1} {2}"
-        return txt.format(self.id_repartidor, self.nombre , self.apellido)
+    def __str__(self) -> str:
+        return f"{self.id_repartidor}, {self.nombre} , {self.apellido}"
 
 class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key=True)
@@ -60,3 +58,7 @@ class Pedido(models.Model):
         fechaPedido = self.fecha.strftime("%d/%m/%Y %H:%M:%S")    
         return txt.format(self.id_pedido,  self.cliente, self.producto, reparto, fechaPedido)
 
+class Avatar(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares', null=True, blank=True)

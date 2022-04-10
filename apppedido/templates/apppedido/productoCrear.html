@@ -1,0 +1,58 @@
+{% extends 'apppedido/base.html' %}
+
+{% block main_content %}
+
+
+<!-- Formulario de  productos  , pasado en la vista del producto-->
+<div class="container mt-5">
+ {% if formulario.errors %}
+        <p style="color:red"> Problemas con los datos cargados</p>
+    {% endif %}
+        <form action="/apppedido/productos/" method='POST' class="form-group">
+            {% csrf_token %}
+            <table>
+                {{formulario.as_table}}
+            </table>
+           <br> 
+           <p><input type="submit" class="btn btn-primary" value="Agregar Producto"> </p>
+        </form>
+</div>
+
+<!-- Listado de productos-->
+<div class="container mt-5">
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th class="table-success">Codigo</th>
+                <th class="table-success">Nombre</th>
+                <th class="table-success">Precio</th>
+                <th class="table-success">Accion</th>
+                <th class="table-success"></th>
+            </tr>
+        </thead>
+
+        <body>
+            {% for producto in productos %}
+                <tr>
+                <td>{{producto.id_producto}}</td>
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.precio}}</td>
+                <td>
+                    <button class="btn-info"><a href="{% url 'ActualizarProducto' producto.id_producto %}" >Editar</a></button>
+                </td>
+                <td>
+                    <button>
+                        <a href="{% url 'EliminarProducto' producto.id_producto %}" >Eliminar</a>
+                    </button>
+                </td>
+        
+                </tr>
+             {% endfor %}       
+        </body>
+
+    </table>
+
+</div>
+
+{% endblock main_content %}

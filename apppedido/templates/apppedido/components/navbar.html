@@ -1,11 +1,24 @@
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
+        <!-- href     Recibe el nombre de una vista-->
         <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
         <a class="navbar-brand" href="{% url 'Clientes' %}">Clientes</a>
         <a class="navbar-brand" href="{% url 'Repartidores' %}">Repartidores</a>
         <a class="navbar-brand" href="{% url 'Pedidos' %}">Pedidos</a>
         <a class="navbar-brand" href="{% url 'Productos' %}">Productos</a>
         <a class="navbar-brand" href="{% url 'BuscarProducto' %}">BuscarProducto</a>
-        <a class="btn btn-primary" href="#signup">Sign Up</a>
+        
+        {% if not request.user.is_authenticated %}
+             <a class="btn btn-primary" href="{% url 'login' %}">Iniciar sesion</a>
+             <a class="btn btn-primary" href="{% url 'Register' %}">Registrarse</a>
+        {% else %}
+            <p class="text-muted small mb-4"> {{request.user.username}} </p>
+            
+            <img src="{{imagen_url}}" alt="Imagen" width="8%">
+           
+            <a class="btn btn-primary" href="{% url 'logout' %}">Cerrar sesion</a>
+
+        {% endif %}
+        
     </div>
 </nav>

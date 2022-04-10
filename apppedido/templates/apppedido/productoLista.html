@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Productos</title>
+</head>
+<body>
+    <h1>Listado de Productos</h1>
+    <ul>
+        {%  for producto in object_list   %}
+            <li>
+                <p>Precio: {{producto.nombre}}</p>
+                <p>Precio: {{producto.precio}}</p>
+                <p>
+                    <a href="{%url 'productoDetalle' producto.id_producto %}">Detalle</a>
+                    <a href="{%url 'productoActualizar' producto.id_producto %}">Actualizar</a>
+                    <a href="{%url 'productoEliminar' producto.id_producto %}">Borrar</a>
+                 
+                </p>
+            </li>
+        {%  endfor  %}
+    </ul>
+    <p>
+        <a href="{%url 'productoCrear'%}">Crear Producto</a>
+    </p>
+</body>
+</html>

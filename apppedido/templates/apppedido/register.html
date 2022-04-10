@@ -1,0 +1,14 @@
+{% extends 'apppedido/base.html' %}
+
+{% block main_content %}
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submin">Registrar</button>
+    </form>
+</body>
+</html>
+
+{% endblock main_content %}

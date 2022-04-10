@@ -1,0 +1,26 @@
+{% extends 'apppedido/base.html' %}
+
+{% block main_content %}
+    <div class="container text-center">
+
+        
+        {% if erros %}
+            
+            {% for error  in  erros %}
+                 
+                <p style = "color: red;">{{erros}}</p>     
+            
+            {% endfor %}
+                    
+
+        {% endif %}
+            
+
+        <form  method="post">
+            {% csrf_token %}
+ <!-- Puedo Utilizar form.as_p   o as_table     probar cual me gusta mas -->
+            {{form.as_p}}
+            <input type="submit" class="btn btn-primary" value="Actualizar">
+        </form>
+    </div>
+{% endblock main_content %}
